@@ -1,0 +1,261 @@
+:root {
+  --primary: #002b87;
+  --primary-dark: #000559;
+  --primary-light: #4b53b8;
+  --second: #b0f8ed;
+  --text: #fff;
+  --box-shadow: -5px 7px 30px -10px var(--primary-light);
+  --box-shadow-x: 0px 7px 20px -10px var(--primary-light);
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url(./assets/fonts/Montserrat-Regular.ttf);
+}
+html {
+  font-size: 62.5%;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+}
+*::-webkit-scrollbar {
+  width: 5px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--second);
+  box-shadow: -2px 0 2px rgba(0 / 0.8%);
+}
+*::placeholder {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--primary-light);
+}
+body {
+  font-size: 1.6rem;
+  height: 100vh;
+}
+.background {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+main {
+  padding: 5rem 8rem;
+  width: 100%;
+  height: 100%;
+}
+.section-search {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.section-answer {
+  margin-top: 5rem;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  max-width: 70%;
+  margin-inline: auto;
+  transition: all 500ms;
+}
+.card + .card {
+  margin-top: 8px;
+}
+.card {
+  box-shadow: var(--box-shadow-x);
+  font-weight: 600;
+  position: relative;
+  /* margin-inline: auto; */
+  width: 100%;
+  padding: 2rem 3rem;
+  color: var(--primary-dark);
+  text-align: justify;
+  animation: appear 500ms ease-in;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 0.5rem solid var(--second);
+  z-index: 1;
+}
+.search-box {
+  z-index: 100;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  color: var(--second);
+  background-color: transparent;
+  border: 1rem solid currentColor;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: var(--box-shadow);
+  animation: wait 1700ms alternate infinite;
+  cursor: pointer;
+  transition: all 300ms;
+  transition-delay: 500ms;
+}
+.search-box.grow {
+  border-width: 0.5rem;
+  animation: none;
+  width: 50%;
+  height: auto;
+  background-color: rgba(255, 255, 255, 50%);
+  border-radius: 0;
+  transition-delay: 0ms;
+}
+.search-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1rem;
+  height: 5rem;
+  transform: translateY(100%) rotate(-30deg);
+  background-color: currentColor;
+  box-shadow: 0px 5px 20px 0 var(--primary-light);
+  transition: all 500ms;
+  transition-delay: 500ms;
+  opacity: 1;
+}
+.search-box.grow::after {
+  translate: 100px 100px;
+  transition: all 500ms;
+  transition-delay: 0ms;
+  opacity: 0;
+}
+.search-box > input {
+  caret-color: var(--primary);
+  width: calc(100% - 25px);
+  padding: 1.5rem 2.5rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  background-color: transparent;
+  color: var(--primary-dark);
+  font-family: 'Montserrat';
+}
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  cursor: pointer;
+}
+.close::after,
+.close::before {
+  content: '';
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  height: 70%;
+  translate: 0 -50%;
+  width: 0.4rem;
+  background-color: var(--primary-dark);
+  border-radius: 2rem;
+  transition: all 500ms;
+}
+.close::after {
+  rotate: 45deg;
+  transition-delay: 300ms;
+  translate: -100px 100px;
+}
+.close::before {
+  rotate: -45deg;
+  transition-delay: 500ms;
+  translate: -100px -100px;
+}
+.close.hide {
+  width: 0;
+}
+.close.show {
+  width: 55px;
+}
+.close.show::after,
+.close.show::before {
+  translate: 0 -50%;
+  opacity: 1;
+}
+.close.hide::after,
+.close.hide::before {
+  opacity: 0;
+}
+.close.hide::after {
+  transition-delay: 0ms;
+}
+.close.hide::before {
+  transition-delay: 200ms;
+}
+@keyframes wait {
+  0% {
+    translate: 0 -10px;
+  }
+  10% {
+    translate: 0 -15px;
+  }
+  20% {
+    translate: 0 -20px;
+  }
+  30% {
+    translate: 0 -25px;
+  }
+  40% {
+    translate: 0 -30px;
+  }
+  50% {
+    translate: 0 -25px;
+  }
+  60% {
+    translate: 0 -15px;
+  }
+  70% {
+    translate: 0 -10px;
+  }
+  80% {
+    translate: 0 -5px;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+@keyframes appear {
+  from {
+    translate: 0 100%;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+/* Loading spinner */
+.lds-dual-ring {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 0 -95%;
+  display: inline-block;
+  height: 25px;
+  aspect-ratio: 1;
+}
+.lds-dual-ring:after {
+  content: ' ';
+  display: block;
+  height: 100%;
+  aspect-ratio: 1;
+  margin: 8px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  border-color: var(--primary) transparent var(--primary) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
